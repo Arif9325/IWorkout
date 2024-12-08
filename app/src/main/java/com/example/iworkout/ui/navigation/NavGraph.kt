@@ -8,6 +8,7 @@ import com.example.iworkout.ui.screens.Login
 import com.example.iworkout.ui.screens.SignUp
 import com.example.iworkout.ui.screens.Home
 import com.example.iworkout.ui.screens.AddWorkout
+import com.example.iworkout.ui.screens.ViewWorkouts
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -23,8 +24,11 @@ fun NavGraph(navController: NavHostController) {
             Home(navController)
         }
         composable(route = "add_workout") {
-            AddWorkout(onWorkoutSuccess = { navController.navigate("home") } )
+            AddWorkout(onWorkoutSuccess = { navController.navigate("home") },
+                onBack = { navController.popBackStack() })
         }
-
+        composable(route = "view_workouts") {
+            ViewWorkouts(onBack = { navController.popBackStack() })
+        }
     }
 }

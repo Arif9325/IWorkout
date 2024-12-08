@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun AddWorkout(onWorkoutSuccess: () -> Unit,
+               onBack: () -> Unit,
                workoutViewModel: WorkoutViewModel = viewModel()
 ) {
     var selectedDayId by remember { mutableStateOf(0) }
@@ -148,6 +149,9 @@ fun AddWorkout(onWorkoutSuccess: () -> Unit,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Add Workout")
+            }
+            Button(onClick = onBack) {
+                Text("Back")
             }
         }
     }

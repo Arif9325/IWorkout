@@ -131,17 +131,25 @@ fun WorkoutCard(title: String, imageRes: Int) {
 
 @Composable
 fun ActionButtons(navController: NavHostController) {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(8.dp),
     ) {
+        Button(
+            onClick = { navController.navigate("view_workouts") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
+        ) {
+            Text(text = "View Workouts")
+        }
         // Add Workout button placed at the top
         Button(
             onClick = { navController.navigate("add_workout") },
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.TopStart)
+                .align(Alignment.CenterHorizontally)
         ) {
             Text(text = "Add Workout")
         }
@@ -150,7 +158,7 @@ fun ActionButtons(navController: NavHostController) {
         Button(
             onClick = { /* to be implemented */ },
             modifier = Modifier
-                .align(Alignment.BottomEnd)
+                .align(Alignment.End)
         ) {
             Text(text = "Chat with AI")
         }

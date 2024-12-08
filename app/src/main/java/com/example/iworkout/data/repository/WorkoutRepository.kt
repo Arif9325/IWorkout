@@ -34,15 +34,28 @@ class WorkoutRepository {
     }
 
     // Fetch workouts for a specific user and day
-    fun getWorkoutsForDay(userId: Int, dayId: Int, onResult: (List<Workout>) -> Unit) {
-        db.collection("workouts")
-            .whereEqualTo("userId", userId)  // User ID as Int
-            .whereEqualTo("dayId", dayId)
+    fun getWorkoutsForDay(userId: String, dayId: String, onResult: (List<Workout>) -> Unit) {
+        println("Fetching workouts for userId: $userId, dayId: $dayId")
+
+        var temp = db.collection("workouts")
+
+        temp.whereEqualTo("userId", userId)
+            .whereEqualTo("dayId", dayId.toInt())
             .get()
             .addOnSuccessListener { documents ->
-                val workouts = documents.map { it.toObject(Workout::class.java) }
-                onResult(workouts)
+                if (!documents.isEmpty) {
+                    val workouts = documents.map { it.toObject(Workout::class.java) }
+                    println("Fetched workouts: $workouts")
+                    onResult(workouts)
+                } else {
+                    println("No workouts found for userId: $userId, dayId: $dayId")
+                    onResult(emptyList())
+                }
             }
-            .addOnFailureListener { onResult(emptyList()) }
+            .addOnFailureListener { exception ->
+                println("Error fetching workouts: ${exception.message}")
+                onResult(emptyList())
+            }
     }
+
 }
