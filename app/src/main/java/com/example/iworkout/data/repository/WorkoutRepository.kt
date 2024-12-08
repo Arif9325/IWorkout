@@ -58,4 +58,35 @@ class WorkoutRepository {
             }
     }
 
+    fun getWorkoutById(workoutId: String, onResult: (Workout?) -> Unit) {
+        // Replace with the actual logic to fetch workout from your database (Firestore, Room, etc.)
+        // For example, from Firestore:
+        db.collection("workouts")
+            .document(workoutId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val workout = document.toObject(Workout::class.java)
+                    onResult(workout)
+                } else {
+                    onResult(null)
+                }
+            }
+            .addOnFailureListener { onResult(null) }
+    }
+
+    // This function updates a workout in the database
+    fun updateWorkout(workout: Workout, onComplete: (Boolean) -> Unit) {
+        // Replace with the actual update logic (Firestore, Room, etc.)
+        db.collection("workouts")
+            .document(workout.workoutId)
+            .set(workout)
+            .addOnSuccessListener {
+                onComplete(true)
+            }
+            .addOnFailureListener {
+                onComplete(false)
+            }
+    }
+
 }

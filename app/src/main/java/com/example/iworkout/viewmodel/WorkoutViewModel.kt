@@ -21,7 +21,16 @@ class WorkoutViewModel : ViewModel() {
         workoutRepository.getWorkoutsForDay(userId, dayId, onResult)
     }
 
-    fun getCurrentUserIdAsInt(): Int? {
-        return _currentUserId.value?.toIntOrNull()  // Convert userId from String to Int
+    fun getWorkoutById(workoutId: String, onResult: (Workout?) -> Unit) {
+        workoutRepository.getWorkoutById(workoutId) { workout ->
+            onResult(workout)
+        }
+    }
+
+    // Function to update a workout
+    fun updateWorkout(workout: Workout, onComplete: (Boolean) -> Unit) {
+        workoutRepository.updateWorkout(workout) { success ->
+            onComplete(success)
+        }
     }
 }

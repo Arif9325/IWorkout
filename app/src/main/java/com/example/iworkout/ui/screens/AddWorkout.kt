@@ -3,31 +3,46 @@ package com.example.iworkout.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.iworkout.data.model.Workout
 import com.example.iworkout.viewmodel.WorkoutViewModel
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import com.google.firebase.auth.FirebaseAuth
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddWorkout(onWorkoutSuccess: () -> Unit,
-               onBack: () -> Unit,
-               workoutViewModel: WorkoutViewModel = viewModel()
+fun AddWorkout(
+    onWorkoutSuccess: () -> Unit,
+    workoutViewModel: WorkoutViewModel = viewModel(),
+    navController: NavHostController
 ) {
     var selectedDayId by remember { mutableStateOf(0) }
     var workoutName by remember { mutableStateOf("") }
@@ -39,10 +54,7 @@ fun AddWorkout(onWorkoutSuccess: () -> Unit,
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    val daysOfWeek = mapOf(
-        "Monday" to 1, "Tuesday" to 2, "Wednesday" to 3,
-        "Thursday" to 4, "Friday" to 5, "Saturday" to 6, "Sunday" to 7
-    )
+    val daysOfWeek = listOf("S", "M", "T", "W", "T", "F", "S")
     val repsOptions = (1..20).toList()
     val setsOptions = (1..10).toList()
 
@@ -54,7 +66,7 @@ fun AddWorkout(onWorkoutSuccess: () -> Unit,
             confirmButton = {
                 Button(onClick = {
                     showDialog = false
-                    onWorkoutSuccess()  // Trigger success callback after dismissing dialog
+                    onWorkoutSuccess()
                 }) {
                     Text("OK")
                 }
@@ -63,8 +75,25 @@ fun AddWorkout(onWorkoutSuccess: () -> Unit,
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
-    ) { paddingValues ->
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        topBar = {
+            TopAppBar(
+                title = { Text("Add Workout", color = Color.White) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                ),
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Color.White
+                        )
+                    }
+                }
+            )
+        }
+    ){ paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -73,20 +102,43 @@ fun AddWorkout(onWorkoutSuccess: () -> Unit,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Day of the Week Dropdown
-            DropdownMenuWithLabel(
-                label = "Day of the Week",
-                options = daysOfWeek.keys.toList(),
-                selectedOption = daysOfWeek.entries.find { it.value == selectedDayId }?.key ?: "",
-                onOptionSelected = { selectedDayId = daysOfWeek[it] ?: 0 }  // Set as Int
-            )
+            // Days of the Week Buttons
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                daysOfWeek.forEachIndexed { index, day ->
+                    Button(
+                        onClick = { selectedDayId = index + 1 },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (selectedDayId == index + 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer
+                        ),
+                        modifier = Modifier
+                            .weight(1f)
+
+                    ) {
+                        // Display day letter inside the button
+                        Text(
+                            text = day,
+                            color = if (selectedDayId == index + 1) Color.White else Color.Black, // Change color based on selection
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                    }
+                }
+            }
 
             // Workout Name Input
             OutlinedTextField(
                 value = workoutName,
                 onValueChange = { workoutName = it },
                 label = { Text("Workout Name") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary, // Border color when focused
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onSurface, // Border color when not focused
+                    focusedLabelColor = MaterialTheme.colorScheme.primary, // Label color when focused
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurface // Label color when not focused
+                )
             )
 
             // Exercise Type Input
@@ -94,46 +146,61 @@ fun AddWorkout(onWorkoutSuccess: () -> Unit,
                 value = exerciseType,
                 onValueChange = { exerciseType = it },
                 label = { Text("Exercise Type") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary, // Border color when focused
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onSurface, // Border color when not focused
+                    focusedLabelColor = MaterialTheme.colorScheme.primary, // Label color when focused
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurface // Label color when not focused
+                )
             )
+            Spacer(modifier = Modifier.height(16.dp))
 
-            DropdownMenuWithLabel(
-                label = "Number of Reps",
-                options = repsOptions.map { it.toString() },
-                selectedOption = if (selectedReps == 0) "" else selectedReps.toString(),
-                onOptionSelected = { selectedReps = it.toInt() }
-            )
+            // Reps and Sets Inputs
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(Modifier.weight(1f)) {
+                    DropdownMenuWithLabel(
+                        label = "Reps",
+                        options = repsOptions.map { it.toString() },
+                        selectedOption = if (selectedReps == 0) "" else selectedReps.toString(),
+                        onOptionSelected = { selectedReps = it.toInt() }
+                    )
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(Modifier.weight(1f)) {
+                    DropdownMenuWithLabel(
+                        label = "Sets",
+                        options = setsOptions.map { it.toString() },
+                        selectedOption = if (selectedSets == 0) "" else selectedSets.toString(),
+                        onOptionSelected = { selectedSets = it.toInt() }
+                    )
+                }
+            }
 
-            // Sets Dropdown
-            DropdownMenuWithLabel(
-                label = "Number of Sets",
-                options = setsOptions.map { it.toString() },
-                selectedOption = if (selectedSets == 0) "" else selectedSets.toString(),
-                onOptionSelected = { selectedSets = it.toInt() }
-            )
+            // Add Workout Button
             Button(
                 onClick = {
-                    // Check that all fields are filled and valid
                     if (selectedDayId != 0 && workoutName.isNotBlank() && exerciseType.isNotBlank()
                         && selectedReps > 0 && selectedSets > 0
                     ) {
-                        // Fetch the current user's ID
                         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
                         val workout = Workout(
-                            workoutId = "",  // Empty, as workoutId will be generated in the repository
+                            workoutId = "",
                             exerciseType = exerciseType,
                             workoutName = workoutName,
                             sets = selectedSets,
                             reps = selectedReps,
-                            userId = currentUserId?: "",  // Pass the actual userId here
+                            userId = currentUserId ?: "",
                             dayId = selectedDayId
                         )
 
-                        // Add workout and handle success
                         workoutViewModel.addWorkout(workout) { success ->
                             if (success) {
-                                showDialog = true // Trigger success callback
+                                showDialog = true
                             } else {
                                 coroutineScope.launch {
                                     snackbarHostState.showSnackbar("Failed to add workout. Please try again.")
@@ -146,12 +213,11 @@ fun AddWorkout(onWorkoutSuccess: () -> Unit,
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
             ) {
                 Text("Add Workout")
-            }
-            Button(onClick = onBack) {
-                Text("Back")
             }
         }
     }
@@ -172,7 +238,7 @@ fun DropdownMenuWithLabel(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable { expanded = true }
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.secondaryContainer) // Hardcoded background color
                 .padding(8.dp)
         ) {
             Text(
@@ -186,10 +252,12 @@ fun DropdownMenuWithLabel(
         ) {
             options.forEach { option ->
                 DropdownMenuItem(
-                    { Text(text = option) }, onClick = {
+                    onClick = {
                         onOptionSelected(option)
                         expanded = false
-                    })
+                    },
+                    text = { Text(text = option) }
+                )
             }
         }
     }

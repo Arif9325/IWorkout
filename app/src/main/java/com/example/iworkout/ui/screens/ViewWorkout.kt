@@ -24,11 +24,13 @@ import com.example.iworkout.data.model.Workout
 import com.example.iworkout.viewmodel.WorkoutViewModel
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun ViewWorkouts(
     onBack: () -> Unit,
+    navController: NavController,
     workoutViewModel: WorkoutViewModel = viewModel()
 ) {
     val workoutsState = remember { mutableStateOf<List<Workout>>(emptyList()) }
@@ -72,7 +74,7 @@ fun ViewWorkouts(
         // Workouts List
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(workoutsState.value) { workout ->
-                WorkoutItem(workout = workout)
+                WorkoutItem(workout = workout, navController)
             }
         }
 
@@ -83,7 +85,7 @@ fun ViewWorkouts(
 }
 
 @Composable
-fun WorkoutItem(workout: Workout) {
+fun WorkoutItem(workout: Workout, navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -94,6 +96,16 @@ fun WorkoutItem(workout: Workout) {
             Text("Workout Name: ${workout.workoutName}")
             Text("Exercise Type: ${workout.exerciseType}")
             Text("Reps: ${workout.reps}, Sets: ${workout.sets}")
+        }
+        Button(
+            onClick = {
+                var workoutId = workout.workoutId
+
+                // Assuming `workoutId` is available
+                navController.navigate("edit_workout/" + workoutId)
+            }
+        ) {
+            Text("Edit Workout")
         }
     }
 }
