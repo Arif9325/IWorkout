@@ -76,7 +76,7 @@ fun Home(navController: NavHostController) {
             HeaderSection(navController)
             Spacer(modifier = Modifier.height(16.dp))
             WorkoutGrid()
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(32.dp))
             ActionButtons(navController) { showDialog = true }
         }
 
@@ -215,6 +215,7 @@ fun ActionButtons(navController: NavHostController, onChatWithAI: () -> Unit) {
         ) {
             Text(text = "Add Workout")
         }
+        Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = { onChatWithAI() },
             modifier = Modifier.align(Alignment.End)
