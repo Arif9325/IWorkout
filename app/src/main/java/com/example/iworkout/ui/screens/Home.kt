@@ -229,7 +229,7 @@ fun ActionButtons(navController: NavHostController, onChatWithAI: () -> Unit) {
 fun callOpenAI(message: String, onResponse: (String) -> Unit) {
     val client = OkHttpClient()
     val apiUrl = "https://api.openai.com/v1/chat/completions"
-    val apiKey = "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" // Replace with your actual OpenAI API key
+    val apiKey = "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"
 
     val jsonBody = JSONObject().apply {
         put("model", "gpt-4") // Specify the model
