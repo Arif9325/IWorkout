@@ -54,7 +54,7 @@ fun AddWorkout(
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    val daysOfWeek = listOf("S", "M", "T", "W", "T", "F", "S")
+    val daysOfWeek = listOf( "M", "T", "W", "T", "F", "S","S")
     val repsOptions = (1..20).toList()
     val setsOptions = (1..10).toList()
 
