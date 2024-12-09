@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    // OkHttp for Azure OpenAI API integration
+    implementation(libs.okhttp)
     // Firebase
     implementation(platform(libs.firebase.bom.v3370)) // BOM for version alignment
     implementation(libs.firebase.analytics)
