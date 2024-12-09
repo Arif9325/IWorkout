@@ -120,7 +120,20 @@ fun ViewWorkouts(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(workoutsState.value) { workout ->
-                    WorkoutItem(workout = workout, navController)
+                    WorkoutItem(workout = workout, navController,
+                        onDelete = { workoutToDelete ->
+                            workoutsState.value -= workoutToDelete
+                            // Call the delete function and show snackbar in the onComplete callback
+                            workoutViewModel.deleteWorkout(workoutToDelete) { success ->
+                                coroutineScope.launch {
+                                    if (success) {
+                                        snackbarHostState.showSnackbar("Workout deleted.")
+                                    } else {
+                                        snackbarHostState.showSnackbar("Failed to delete workout.")
+                                    }
+                                }
+                            }
+                        })
                 }
             }
         }
@@ -128,25 +141,45 @@ fun ViewWorkouts(
 }
 
 @Composable
-fun WorkoutItem(workout: Workout, navController: NavController) {
+fun WorkoutItem(workout: Workout, navController: NavController, onDelete: (Workout) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween // Ensure space between text and buttons
     ) {
-        Column {
+        // Text content on the left side
+        Column(
+            modifier = Modifier.weight(1f) // Allow this to take up as much space as possible
+        ) {
             Text("Workout Name: ${workout.workoutName}")
             Text("Exercise Type: ${workout.exerciseType}")
             Text("Reps: ${workout.reps}, Sets: ${workout.sets}")
         }
-        Button(
-            onClick = {
-                val workoutId = workout.workoutId
-                navController.navigate("edit_workout/$workoutId")
+
+        // Buttons on the right side
+        Row {
+            // Edit Button (left of Delete)
+            Button(
+                onClick = {
+                    val workoutId = workout.workoutId
+                    navController.navigate("edit_workout/$workoutId")
+                },
+                modifier = Modifier.padding(end = 8.dp)  // Space between Edit and Delete
+            ) {
+                Text("Edit Workout")
             }
-        ) {
-            Text("Edit Workout")
+
+            // Delete Button (right of Edit)
+            Button(
+                onClick = { onDelete(workout) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.error
+                )
+            ) {
+                Text("Delete")
+            }
         }
     }
 }
+
