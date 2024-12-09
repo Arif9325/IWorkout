@@ -89,4 +89,11 @@ class WorkoutRepository {
             }
     }
 
+    fun deleteWorkout(workout: Workout, onComplete: (Boolean) -> Unit) {
+        db.collection("workouts").document(workout.workoutId)
+            .delete()
+            .addOnSuccessListener { onComplete(true) }
+            .addOnFailureListener { onComplete(false) }
+    }
+
 }

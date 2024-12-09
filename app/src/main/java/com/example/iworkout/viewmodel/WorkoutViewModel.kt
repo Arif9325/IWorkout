@@ -11,8 +11,6 @@ class WorkoutViewModel : ViewModel() {
 
     private val workoutRepository = WorkoutRepository()
 
-    private val _currentUserId = MutableStateFlow<String?>(null)
-
     fun addWorkout(workout: Workout, onComplete: (Boolean) -> Unit) {
         workoutRepository.addWorkout(workout, onComplete)
     }
@@ -32,5 +30,9 @@ class WorkoutViewModel : ViewModel() {
         workoutRepository.updateWorkout(workout) { success ->
             onComplete(success)
         }
+    }
+
+    fun deleteWorkout(workout: Workout, onComplete: (Boolean) -> Unit) {
+        workoutRepository.deleteWorkout(workout, onComplete)
     }
 }
