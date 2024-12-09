@@ -224,7 +224,7 @@ fun ActionButtons(navController: NavHostController, onChatWithAI: () -> Unit) {
     }
 }
 
-// Function to call OpenAI API
+ // Function to call OpenAI API
 fun callOpenAI(message: String, onResponse: (String) -> Unit) {
     val client = OkHttpClient()
     val apiUrl = "https://api.openai.com/v1/chat/completions"
