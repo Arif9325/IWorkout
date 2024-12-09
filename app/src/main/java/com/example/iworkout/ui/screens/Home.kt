@@ -263,6 +263,7 @@ fun callOpenAI(message: String, onResponse: (String) -> Unit) {
             onResponse("Failed to connect to AI service. Please try again. Error: ${e.message}")
         }
 
+
         override fun onResponse(call: Call, response: Response) {
             if (response.isSuccessful) {
                 val responseBody = response.body?.string()
