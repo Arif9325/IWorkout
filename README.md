@@ -8,37 +8,7 @@
 ### IWorkout
 ![App Logo](https://github.com/user-attachments/assets/03ab2f28-cb50-468c-8c80-6343fed77285)
 
-## AppDev_Milestone3
 
-</div>
-
-### List of Tasks
-
-- Creating/Using the Database
-  - Priority: High
-  - Estimated Time: 0.5-1 hrs
-  - Issue
-- Creating the Login/Signup Pages
-  - Priority: Medium
-  - Estimated Time: 1-2 hrs
-  - Issue
-- Creating the Home Page
-  - Priority: Medium
-  - Estimated Time: 1-2 hrs
-  - Issue
-- Creating the Add Workout Page
-  - Priority: Medium
-  - Estimated Time: 1-2 hrs
-  - Issue
-- Creating the View Workout Page
-  - Priority: Medium
-  - Estimated Time: 1-2 hrs
-- Implementing/Using the AI API
-  - Priority: Low
-  - Estimated Time: 2-3 hrs
-- Implementing User Options
-  - Priority: Low
-  - Estimated Time: 1.5-2.5 hrs
 
 
 
