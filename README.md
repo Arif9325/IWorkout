@@ -25,24 +25,24 @@ If the user does not already have an account, they can navigate to the sign-up p
 #### Home Page
 After logging in, the user is authenticated and directed to the home page, which greets them with their name (e.g., "Hello, [User]!").  
 From the home page, the user can:
-- **Log out**
-- **Chat with the AI**
-- **Add a workout**
-- **View their workout routines**  
+ **Log out**
+ **Chat with the AI**
+ **Add a workout**
+ **View their workout routines**  
 <img src="https://github.com/user-attachments/assets/7970e951-16fe-4b1d-8b63-a786698ec4ef" alt="Home Page" width="500"/>
 
 #### Workout Planner
 Users can add workouts to specific days of the week (Monday to Sunday). They can:
-- Choose a day for the workout.
-- Add multiple workouts to a single day.  
+ Choose a day for the workout.
+ Add multiple workouts to a single day.  
 
 This allows the user to build a detailed workout routine.  
 <img src="https://github.com/user-attachments/assets/32e65ffb-5071-4b3b-8af6-cc3d99773157" alt="Workout Planner" width="500"/>
 
 #### View Workouts
 In the "View Workouts" section, the user can:
-- Select a specific day to view all workouts for that day.
-- Edit or delete workouts if needed.  
+ Select a specific day to view all workouts for that day.
+ Edit or delete workouts if needed.  
 
 This section gives the user full control over their workout routines.  
 <img src="https://github.com/user-attachments/assets/a2b6c7ae-bcca-44f8-80e2-2fee1e9b8e12" alt="View Workouts" width="500"/>
