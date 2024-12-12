@@ -37,7 +37,7 @@ Users can add workouts to specific days of the week (Monday to Sunday). They can
  Add multiple workouts to a single day.  
 
 This allows the user to build a detailed workout routine.  
-<img src="https://github.com/user-attachments/assets/32e65ffb-5071-4b3b-8af6-cc3d99773157" alt="Workout Planner" width="500"/>
+<img src="https://github.com/user-attachments/assets/32e65ffb-5071-4e3b-8af6-cc3d99773157" alt="drawing" width="500"/>
 
 #### View Workouts
 In the "View Workouts" section, the user can:
