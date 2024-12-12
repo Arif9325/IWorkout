@@ -1,16 +1,14 @@
 <div align="center">
 
-# Application Development 2 Project
 
 ## Personal Trainers
-### Featuring: Marcus, Sayed, Jayson
+### Featuring: Marcus, Sayed Arif Shah, Jayson
 
 ### IWorkout
 ![App Logo](https://github.com/user-attachments/assets/03ab2f28-cb50-468c-8c80-6343fed77285)
 
 <div align="center">
   
-## AppDev_Milestone2
 
 ### Description
 A workout tracking app designed to record exercises and display weekly data for users.
@@ -39,19 +37,19 @@ The AI integration will utilize [OpenAI](https://openai.com/).
 #### Workout Planner
 
 On the workout planner page, users can access numerous features, including:
-- A date selector for planning workouts.
-- A container to input the name of the workout.
-- Drop-down menus to select sets and reps for each workout.
-- An "Add Workout" button that sends a POST request to the database.
+  A date selector for planning workouts.
+  A container to input the name of the workout.
+  Drop-down menus to select sets and reps for each workout.
+  An "Add Workout" button that sends a POST request to the database.
 
 <img src="https://github.com/user-attachments/assets/32e65ffb-5071-4e3b-8af6-cc3d99773157" alt="Workout Planner" width="500"/>
 
 #### View Workouts
 
 On the "View Workouts" page, users can see their workouts in a weekly format. Each entry includes:
-- Day of the week.
-- Workout name.
-- Other relevant workout details.
+  Day of the week.
+  Workout name.
+  Other relevant workout details.
 Users also have options to **edit** or **delete** workout entries.
 
 <img src="https://github.com/user-attachments/assets/a2b6c7ae-bcca-44f8-80e2-2fee1e9b8e12" alt="View Workouts" width="500"/>
