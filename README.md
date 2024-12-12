@@ -58,13 +58,3 @@ Users also have options to **edit** or **delete** workout entries.
 <img src="https://github.com/user-attachments/assets/065cdb88-55aa-4400-bb9c-557b08fbb0aa" alt="App Layout" width="500"/>
 
 [Layout of the Application](https://www.figma.com/design/3mzdCZkvPArN40DGfZJkuE/Milestone-2-proposal?node-id=0-1&node-type=canvas&t=8MJQu4OmHBfcHCTv-0)
-
-#### Conceptual Design of Database
-
-<img src="https://github.com/user-attachments/assets/0a9df2e4-446b-4464-867a-f403c27dc1e0" alt="Conceptual Design" width="500"/>
-
-#### Physical Design of Database
-
-<img src="https://github.com/user-attachments/assets/22c27cb9-5754-4831-911d-3398e4535451" alt="Physical Design" width="500"/>
-
-</div>
