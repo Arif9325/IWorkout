@@ -1,6 +1,5 @@
 <div align="center">
 
-
 ## Personal Trainers
 ### Featuring: Marcus, Sayed Arif Shah, Jayson
 
@@ -11,50 +10,46 @@
   
 
 ### Description
-A workout tracking app designed to record exercises and display weekly data for users.
+A workout tracking app designed to help users create and manage their workout routines easily.
 
-### Scope
+### How It Works
 
 #### Login
-The app starts with a login screen that prevents users from accessing the app until they log in. 
+The app starts on a login page where the user can log in to their account.  
 <img src="https://github.com/user-attachments/assets/1f4dfdcc-5129-4329-9025-6110959a5ebe" alt="Login Screen" width="500"/>
 
 #### Sign Up
-If the user does not have an account, they can navigate to the sign-up screen to create one.
+If the user does not already have an account, they can navigate to the sign-up page to create one. After successfully signing up, the user is redirected back to the login page to log in with their newly created account.  
 <img src="https://github.com/user-attachments/assets/23c7436d-aac1-4f9c-95f9-32d9db65d433" alt="Sign-Up Screen" width="500"/>
 
-##### Note: 
-When the user makes a login/sign-up request, the app sends a POST or GET request to the database to log the user in or create an account.
-
 #### Home Page
-After logging in or signing up, the user is redirected to the home screen, which displays their user information along with buttons to the workout logger and the workout viewer pages. 
-
+After logging in, the user is authenticated and directed to the home page, which greets them with their name (e.g., "Hello, [User]!").  
+From the home page, the user can:
+- **Log out**
+- **Chat with the AI**
+- **Add a workout**
+- **View their workout routines**  
 <img src="https://github.com/user-attachments/assets/7970e951-16fe-4b1d-8b63-a786698ec4ef" alt="Home Page" width="500"/>
 
-##### Note: 
-The AI integration will utilize [OpenAI](https://openai.com/).
-
 #### Workout Planner
+Users can add workouts to specific days of the week (Monday to Sunday). They can:
+- Choose a day for the workout.
+- Add multiple workouts to a single day.  
 
-On the workout planner page, users can access numerous features, including:
-  A date selector for planning workouts.
-  A container to input the name of the workout.
-  Drop-down menus to select sets and reps for each workout.
-  An "Add Workout" button that sends a POST request to the database.
-
-<img src="https://github.com/user-attachments/assets/32e65ffb-5071-4e3b-8af6-cc3d99773157" alt="Workout Planner" width="500"/>
+This allows the user to build a detailed workout routine.  
+<img src="https://github.com/user-attachments/assets/32e65ffb-5071-4b3b-8af6-cc3d99773157" alt="Workout Planner" width="500"/>
 
 #### View Workouts
+In the "View Workouts" section, the user can:
+- Select a specific day to view all workouts for that day.
+- Edit or delete workouts if needed.  
 
-On the "View Workouts" page, users can see their workouts in a weekly format. Each entry includes:
-  Day of the week.
-  Workout name.
-  Other relevant workout details.
-Users also have options to **edit** or **delete** workout entries.
-
+This section gives the user full control over their workout routines.  
 <img src="https://github.com/user-attachments/assets/a2b6c7ae-bcca-44f8-80e2-2fee1e9b8e12" alt="View Workouts" width="500"/>
 
 #### Layout
 <img src="https://github.com/user-attachments/assets/065cdb88-55aa-4400-bb9c-557b08fbb0aa" alt="App Layout" width="500"/>
 
 [Layout of the Application](https://www.figma.com/design/3mzdCZkvPArN40DGfZJkuE/Milestone-2-proposal?node-id=0-1&node-type=canvas&t=8MJQu4OmHBfcHCTv-0)
+
+</div>
