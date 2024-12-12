@@ -1,6 +1,6 @@
 <div align="center">
 
-## Personal Trainers
+## IWorkout
 ### Featuring: Marcus, Sayed Arif Shah, Jayson
 
 ### IWorkout
